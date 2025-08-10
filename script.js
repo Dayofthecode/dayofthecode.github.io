@@ -5,6 +5,7 @@ const manufacturerElement = document.getElementById('manufacturer');
 
 // Get the user's device info
 const userAgent = navigator.userAgent;
+console.log(userAgent); // Log the userAgent string to the console
 const browserInfo = getBrowserInfo(userAgent);
 const androidVersion = getAndroidVersion(userAgent);
 const manufacturer = getManufacturer(userAgent);
@@ -22,7 +23,7 @@ function getBrowserInfo(userAgent) {
 }
 
 function getAndroidVersion(userAgent) {
-    const androidRegex = /Android (\d+\.\d+)/;
+    const androidRegex = /Android\s+([\d.]+)/i;
     const match = userAgent.match(androidRegex);
     return match ? match[1] : 'Unknown';
 }
