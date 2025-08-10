@@ -44,9 +44,39 @@ function getAndroidVersion(userAgent) {
 }
 
 function getDeviceModel(userAgent) {
-    const deviceModelRegex = /\b(?:SM|SC|SG|Samsung|OnePlus|Google|Pixel|Huawei|Honor|Xiaomi|Redmi|POCO|Realme|Vivo|Oppo|Motorola|Lenovo|Asus|LG|Sony|Xperia|Nokia|HTC|ZTE)\s*[a-zA-Z0-9\-]+/gi;
-    const match = userAgent.match(deviceModelRegex);
-    return match ? match[0].trim() : 'Unknown';
+    // Method 1: Look for a specific pattern in the user agent string
+    const deviceModelRegex1 = /\(([^)]+)\)/;
+    const match1 = userAgent.match(deviceModelRegex1);
+    if (match1) {
+        const deviceInfo = match1[1].split(';');
+        for (const info of deviceInfo) {
+            const trimmedInfo = info.trim();
+            if (!trimmedInfo.includes('Android') && !trimmedInfo.includes('Build') && !trimmedInfo.includes('Linux')) {
+                return trimmedInfo;
+            }
+        }
+    }
+
+    // Method 2: Look for a brand name followed by a model number
+    const deviceModelRegex2 = /\b(?:SM|SC|SG|Samsung|OnePlus|Google|Pixel|Huawei|Honor|Xiaomi|Redmi|POCO|Realme|Vivo|Oppo|Motorola|Lenovo|Asus|LG|Sony|Xperia|Nokia|HTC|ZTE)\s*[a-zA-Z0-9\-]+/gi;
+    const match2 = userAgent.match(deviceModelRegex2);
+    if (match2) {
+        return match2[0].trim();
+    }
+
+    // Method 3: Look for a model number or identifier in the user agent string
+    const deviceModelRegex3 = /[a-zA-Z0-9]+(?:[_-][a-zA-Z0-9]+)*/g;
+    const matches3 = userAgent.match(deviceModelRegex3);
+    if (matches3) {
+        for (const match of matches3) {
+            if (match.length > 3 && !match.includes('Android') && !match.includes('Linux')) {
+                return match;
+            }
+        }
+    }
+
+    // If all else fails, return 'Unknown'
+    return 'Unknown';
 }
 
 function getTimeZone() {
