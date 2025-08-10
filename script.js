@@ -1,7 +1,8 @@
 // Get the elements to display the info
 const browserInfoElement = document.getElementById('browser-info');
 const androidVersionElement = document.getElementById('android-version');
-const deviceModelElement = document.getElementById('device-model'); // Updated to device-model
+const deviceModelElement = document.getElementById('device-model');
+const deviceBrandElement = document.getElementById('device-brand'); // New element for device brand
 const timeZoneElement = document.getElementById('time-zone');
 
 // Get the user's device info
@@ -9,25 +10,14 @@ const userAgent = navigator.userAgent;
 const browserInfo = getBrowserInfo(userAgent);
 const androidVersion = getAndroidVersion(userAgent);
 const deviceModel = getDeviceModel(userAgent);
+const deviceBrand = getDeviceBrand(userAgent); // Get device brand
 const timeZone = getTimeZone();
 
-// Define the field names
-// const fieldNames = {
-//     browser: 'Браузер',
-//     androidVersion: 'Версия Андроид',
-//     deviceModel: 'Производитель/Модель телефона',
-//     timeZone: 'Часовой Пояс'
-// };
-
-// Display the device info with custom field names
-// browserInfoElement.textContent = `${fieldNames.browser}: ${browserInfo}`;
-// androidVersionElement.textContent = `${fieldNames.androidVersion}: ${androidVersion}`;
-// deviceModelElement.textContent = `${fieldNames.deviceModel}: ${deviceModel}`; // Updated to deviceModelElement
-// timeZoneElement.textContent = `${fieldNames.timeZone}: ${timeZone}`;
-
+// Display the device info
 browserInfoElement.textContent = `${browserInfo}`;
 androidVersionElement.textContent = `${androidVersion}`;
 deviceModelElement.textContent = `${deviceModel}`;
+deviceBrandElement.textContent = `${deviceBrand}`; // Display device brand
 timeZoneElement.textContent = `${timeZone}`;
 
 // Helper functions to extract device info from user agent
@@ -76,6 +66,36 @@ function getDeviceModel(userAgent) {
     }
 
     // If all else fails, return 'Unknown'
+    return 'Unknown';
+}
+
+function getDeviceBrand() {
+    const userAgent = navigator.userAgent.toLowerCase();
+    const brands = [
+        { regex: /samsung|sm-/i, brand: 'Samsung' },
+        { regex: /google|pixel/i, brand: 'Google' },
+        { regex: /oneplus/i, brand: 'OnePlus' },
+        { regex: /huawei|honor/i, brand: 'Huawei' },
+        { regex: /xiaomi|redmi|mi-/i, brand: 'Xiaomi' },
+        { regex: /oppo/i, brand: 'Oppo' },
+        { regex: /vivo/i, brand: 'Vivo' },
+        { regex: /realme/i, brand: 'Realme' },
+        { regex: /motorola|moto/i, brand: 'Motorola' },
+        { regex: /lenovo/i, brand: 'Lenovo' },
+        { regex: /asus/i, brand: 'Asus' },
+        { regex: /lg/i, brand: 'LG' },
+        { regex: /sony|xperia/i, brand: 'Sony' },
+        { regex: /nokia/i, brand: 'Nokia' },
+        { regex: /htc/i, brand: 'HTC' },
+        { regex: /zte/i, brand: 'ZTE' },
+    ];
+
+    for (const brand of brands) {
+        if (brand.regex.test(userAgent)) {
+            return brand.brand;
+        }
+    }
+
     return 'Unknown';
 }
 
