@@ -32,14 +32,20 @@ p {
 }
 
 #slider-container {
-    margin-top: 50px;
+    margin-top: 45px;
+}
+
+#slider-title {
+    text-align: center;
+    font-size: 18px;
+    background-color: #2e2e2e;
+    padding: 5px;
 }
 
 #slider {
-    margin-top: 20px;
+    margin-top: 10px;
     bottom: 20px;
     left: 50%;
-    /* transform: translateX(-50%); */
     width: 100%;
     height: 50px;
     border-radius: 5px;
