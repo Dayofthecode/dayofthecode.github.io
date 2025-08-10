@@ -5,15 +5,21 @@ const manufacturerElement = document.getElementById('manufacturer');
 
 // Get the user's device info
 const userAgent = navigator.userAgent;
-console.log(userAgent); // Log the userAgent string to the console
 const browserInfo = getBrowserInfo(userAgent);
 const androidVersion = getAndroidVersion(userAgent);
 const manufacturer = getManufacturer(userAgent);
 
-// Display the device info
-browserInfoElement.textContent = `Browser: ${browserInfo}`;
-androidVersionElement.textContent = `Android Version: ${androidVersion}`;
-manufacturerElement.textContent = `Manufacturer: ${manufacturer}`;
+// Define the field names
+const fieldNames = {
+    browser: 'Веб браузер',
+    androidVersion: 'Версия Андроид',
+    manufacturer: 'Производитель телефона'
+};
+
+// Display the device info with custom field names
+browserInfoElement.textContent = `${fieldNames.browser}: ${browserInfo}`;
+androidVersionElement.textContent = `${fieldNames.androidVersion}: ${androidVersion}`;
+manufacturerElement.textContent = `${fieldNames.manufacturer}: ${manufacturer}`;
 
 // Helper functions to extract device info from user agent
 function getBrowserInfo(userAgent) {
