@@ -12,18 +12,23 @@ const deviceModel = getDeviceModel(userAgent);
 const timeZone = getTimeZone();
 
 // Define the field names
-const fieldNames = {
-    browser: 'Браузер',
-    androidVersion: 'Версия Андроид',
-    deviceModel: 'Производитель/Модель телефона',
-    timeZone: 'Часовой Пояс'
-};
+// const fieldNames = {
+//     browser: 'Браузер',
+//     androidVersion: 'Версия Андроид',
+//     deviceModel: 'Производитель/Модель телефона',
+//     timeZone: 'Часовой Пояс'
+// };
 
 // Display the device info with custom field names
-browserInfoElement.textContent = `${fieldNames.browser}: ${browserInfo}`;
-androidVersionElement.textContent = `${fieldNames.androidVersion}: ${androidVersion}`;
-deviceModelElement.textContent = `${fieldNames.deviceModel}: ${deviceModel}`; // Updated to deviceModelElement
-timeZoneElement.textContent = `${fieldNames.timeZone}: ${timeZone}`;
+// browserInfoElement.textContent = `${fieldNames.browser}: ${browserInfo}`;
+// androidVersionElement.textContent = `${fieldNames.androidVersion}: ${androidVersion}`;
+// deviceModelElement.textContent = `${fieldNames.deviceModel}: ${deviceModel}`; // Updated to deviceModelElement
+// timeZoneElement.textContent = `${fieldNames.timeZone}: ${timeZone}`;
+
+browserInfoElement.textContent = `${browserInfo}`;
+androidVersionElement.textContent = `${androidVersion}`;
+deviceModelElement.textContent = `${deviceModel}`;
+timeZoneElement.textContent = `${timeZone}`;
 
 // Helper functions to extract device info from user agent
 function getBrowserInfo(userAgent) {
