@@ -1,7 +1,7 @@
 // Get the elements to display the info
 const browserInfoElement = document.getElementById('browser-info');
 const androidVersionElement = document.getElementById('android-version');
-const manufacturerElement = document.getElementById('manufacturer');
+const deviceModelElement = document.getElementById('device-model'); // Updated to device-model
 const timeZoneElement = document.getElementById('time-zone');
 
 // Get the user's device info
@@ -15,14 +15,14 @@ const timeZone = getTimeZone();
 const fieldNames = {
     browser: 'Браузер',
     androidVersion: 'Версия Андроид',
-    deviceModel: 'Модель Телефона',
+    deviceModel: 'Производитель/Модель телефона',
     timeZone: 'Часовой Пояс'
 };
 
 // Display the device info with custom field names
 browserInfoElement.textContent = `${fieldNames.browser}: ${browserInfo}`;
 androidVersionElement.textContent = `${fieldNames.androidVersion}: ${androidVersion}`;
-manufacturerElement.textContent = `${fieldNames.deviceModel}: ${deviceModel}`;
+deviceModelElement.textContent = `${fieldNames.deviceModel}: ${deviceModel}`; // Updated to deviceModelElement
 timeZoneElement.textContent = `${fieldNames.timeZone}: ${timeZone}`;
 
 // Helper functions to extract device info from user agent
