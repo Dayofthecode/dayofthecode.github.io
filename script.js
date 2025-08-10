@@ -44,11 +44,10 @@ function getAndroidVersion(userAgent) {
 }
 
 function getDeviceModel(userAgent) {
-    const deviceModelRegex = /\(([^)]+)\)/;
+    const deviceModelRegex = /\(.*?;\s*([^;]+);\s*[^)]+\)/;
     const match = userAgent.match(deviceModelRegex);
     if (match) {
-        const deviceInfo = match[1].split(';');
-        return deviceInfo[deviceInfo.length - 1].trim();
+        return match[1].trim();
     }
     return 'Unknown';
 }
