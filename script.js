@@ -106,3 +106,15 @@ function getTimeZone() {
         return 'Unknown';
     }
 }
+
+// Get the slider element
+const slider = document.getElementById('slider');
+
+// Add an event listener to the slider
+slider.addEventListener('input', (e) => {
+    const value = e.target.value;
+    const hue = value * 3.6; // Convert the slider value to a hue value (0-360)
+    const backgroundColor = `hsl(${hue}, 100%, 50%)`; // Create an HSL color string
+    document.body.style.background = backgroundColor; // Set the background color
+    document.body.style.transition = 'background 0.1s'; // Add a transition effect
+});
