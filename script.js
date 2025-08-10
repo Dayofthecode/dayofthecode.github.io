@@ -44,12 +44,9 @@ function getAndroidVersion(userAgent) {
 }
 
 function getDeviceModel(userAgent) {
-    const deviceModelRegex = /\(.*?;\s*([^;]+);\s*[^)]+\)/;
+    const deviceModelRegex = /\b(?:SM|SC|SG|Samsung|OnePlus|Google|Pixel|Huawei|Honor|Xiaomi|Redmi|POCO|Realme|Vivo|Oppo|Motorola|Lenovo|Asus|LG|Sony|Xperia|Nokia|HTC|ZTE)\s*[a-zA-Z0-9\-]+/gi;
     const match = userAgent.match(deviceModelRegex);
-    if (match) {
-        return match[1].trim();
-    }
-    return 'Unknown';
+    return match ? match[0].trim() : 'Unknown';
 }
 
 function getTimeZone() {
