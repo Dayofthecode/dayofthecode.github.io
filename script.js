@@ -8,21 +8,21 @@ const timeZoneElement = document.getElementById('time-zone');
 const userAgent = navigator.userAgent;
 const browserInfo = getBrowserInfo(userAgent);
 const androidVersion = getAndroidVersion(userAgent);
-const manufacturer = getManufacturer(userAgent);
+const deviceModel = getDeviceModel(userAgent);
 const timeZone = getTimeZone();
 
 // Define the field names
 const fieldNames = {
     browser: 'Браузер',
     androidVersion: 'Версия Андроид',
-    manufacturer: 'Производитель телефона',
-    timeZone: 'Часовой пояс'
+    deviceModel: 'Модель Телефона',
+    timeZone: 'Часовой Пояс'
 };
 
 // Display the device info with custom field names
 browserInfoElement.textContent = `${fieldNames.browser}: ${browserInfo}`;
 androidVersionElement.textContent = `${fieldNames.androidVersion}: ${androidVersion}`;
-manufacturerElement.textContent = `${fieldNames.manufacturer}: ${manufacturer}`;
+manufacturerElement.textContent = `${fieldNames.deviceModel}: ${deviceModel}`;
 timeZoneElement.textContent = `${fieldNames.timeZone}: ${timeZone}`;
 
 // Helper functions to extract device info from user agent
@@ -38,10 +38,14 @@ function getAndroidVersion(userAgent) {
     return match ? match[1] : 'Unknown';
 }
 
-function getManufacturer(userAgent) {
-    const manufacturerRegex = /\(([^;]+);/;
-    const match = userAgent.match(manufacturerRegex);
-    return match ? match[1].trim() : 'Unknown';
+function getDeviceModel(userAgent) {
+    const deviceModelRegex = /\(([^)]+)\)/;
+    const match = userAgent.match(deviceModelRegex);
+    if (match) {
+        const deviceInfo = match[1].split(';');
+        return deviceInfo[deviceInfo.length - 1].trim();
+    }
+    return 'Unknown';
 }
 
 function getTimeZone() {
